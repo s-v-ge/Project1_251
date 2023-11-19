@@ -4,7 +4,7 @@
 //
 //
 
-#include "ourvector.h"
+#include <vector>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -13,13 +13,13 @@
 using namespace std;
 
 struct database {
-  ourvector<ourvector<char>> STRs;
-  ourvector<string> names;
-  ourvector<int> STRcounts;
+  vector<vector<char>> STRs;
+  vector<string> names;
+  vector<int> STRcounts;
 };
 
-ourvector<char> stringParse(string &str) {
-  ourvector<char> vec;
+vector<char> stringParse(string &str) {
+  vector<char> vec;
   for (size_t i = 0; i < str.size(); i++) {
     vec.push_back(str.at(i));
   }
@@ -83,14 +83,14 @@ bool load_db(database &db) {
 
 // print char vec
 //
-void printCharVec(ourvector<char> &vec) {
+void printCharVec(vector<char> &vec) {
   for (int i = 0; i < vec.size(); i++) {
     cout << vec.at(i);
   }
 }
 // display() - displays current info
 //
-void display(database &db, ourvector<char> &dna, ourvector<int> &fileSTRcounts,
+void display(database &db, vector<char> &dna, vector<int> &fileSTRcounts,
              bool dbLoad, bool dnaLoad, bool processed) {
   cout << "Database loaded:" << endl;
   for (int i = 0; i < db.names.size(); i++) {
@@ -125,7 +125,7 @@ void display(database &db, ourvector<char> &dna, ourvector<int> &fileSTRcounts,
 
 // load_dna() - loads dna
 //
-bool load_dna(ourvector<char> &dna) {
+bool load_dna(vector<char> &dna) {
   ifstream inFS;
   string filename;
   string temp;
@@ -147,7 +147,7 @@ bool load_dna(ourvector<char> &dna) {
 
 // process() - process data
 //
-void process(ourvector<char> &dna, ourvector<int> &counts, database &db) {
+void process(vector<char> &dna, vector<int> &counts, database &db) {
   int size = db.STRs.size();
   int length = 0;
   int count = 0;
@@ -181,7 +181,7 @@ void process(ourvector<char> &dna, ourvector<int> &counts, database &db) {
 
 // search() - search data
 //
-void search(database &db, ourvector<int> &counts) {
+void search(database &db, vector<int> &counts) {
   int found = 0;
   cout << "Searching database..." << endl;
   for (int j = 0; j < db.names.size(); j++) {
@@ -201,8 +201,8 @@ void search(database &db, ourvector<int> &counts) {
 int main() {
 
   string com = "";
-  ourvector<char> dna;
-  ourvector<int> fileSTRcounts;
+  vector<char> dna;
+  vector<int> fileSTRcounts;
   database db;
   bool dbLoad = false;
   bool dnaLoad = false;
